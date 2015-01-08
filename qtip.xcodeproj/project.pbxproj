@@ -13,6 +13,8 @@
 		06B9A98E1A5CEA570027CD53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B9A98D1A5CEA570027CD53 /* Images.xcassets */; };
 		06B9A9911A5CEA570027CD53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B9A98F1A5CEA570027CD53 /* LaunchScreen.xib */; };
 		06B9A99D1A5CEA570027CD53 /* qtipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A99C1A5CEA570027CD53 /* qtipTests.swift */; };
+		06B9A9A71A5D1DC30027CD53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A9A61A5D1DC30027CD53 /* SettingsViewController.swift */; };
+		06B9A9AA1A5D267A0027CD53 /* TipPercentagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		06B9A9961A5CEA570027CD53 /* qtipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qtipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B9A99B1A5CEA570027CD53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06B9A99C1A5CEA570027CD53 /* qtipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qtipTests.swift; sourceTree = "<group>"; };
+		06B9A9A61A5D1DC30027CD53 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipPercentagesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +81,8 @@
 		06B9A9831A5CEA570027CD53 /* qtip */ = {
 			isa = PBXGroup;
 			children = (
+				06B9A9A81A5D1DCA0027CD53 /* View Controllers */,
 				06B9A9861A5CEA570027CD53 /* AppDelegate.swift */,
-				06B9A9881A5CEA570027CD53 /* ViewController.swift */,
 				06B9A98A1A5CEA570027CD53 /* Main.storyboard */,
 				06B9A98D1A5CEA570027CD53 /* Images.xcassets */,
 				06B9A98F1A5CEA570027CD53 /* LaunchScreen.xib */,
@@ -110,6 +114,16 @@
 				06B9A99B1A5CEA570027CD53 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06B9A9A81A5D1DCA0027CD53 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */,
+				06B9A9881A5CEA570027CD53 /* ViewController.swift */,
+				06B9A9A61A5D1DC30027CD53 /* SettingsViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +228,8 @@
 			files = (
 				06B9A9891A5CEA570027CD53 /* ViewController.swift in Sources */,
 				06B9A9871A5CEA570027CD53 /* AppDelegate.swift in Sources */,
+				06B9A9A71A5D1DC30027CD53 /* SettingsViewController.swift in Sources */,
+				06B9A9AA1A5D267A0027CD53 /* TipPercentagesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = qtip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -347,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = qtip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
