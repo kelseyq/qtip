@@ -132,11 +132,6 @@
                                 <action selector="backFromSettings:" destination="0ut-rz-Khc" id="orK-o7-F0R"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="apu-gq-gOL">
-                            <connections>
-                                <action selector="startEditing:" destination="0ut-rz-Khc" id="eDa-iA-z1H"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

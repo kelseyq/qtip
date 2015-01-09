@@ -44,7 +44,12 @@ class TipPercentagesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
-        cell.textLabel?.text = "\(tips[indexPath.row])"
+        var tipPercentage = tips[indexPath.row]
+        if tipPercentage == -1.0 {
+            cell.textLabel?.text = "add new tip"
+        } else {
+            cell.textLabel?.text = String(format: "%.2f%%", tipPercentage)
+        }
 
         return cell
     }
@@ -62,6 +67,16 @@ class TipPercentagesTableViewController: UITableViewController {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             tips.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        } else if editingStyle == UITableViewCellEditingStyle.Insert {
+            println("insert")
+        }
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if (indexPath.row == tableView.numberOfRowsInSection(0) - 1) {
+            return UITableViewCellEditingStyle.Insert;
+        } else {
+            return UITableViewCellEditingStyle.Delete;
         }
     }
 
@@ -74,8 +89,7 @@ class TipPercentagesTableViewController: UITableViewController {
 
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+        return !(indexPath.row == tips.count - 1)
     }
 
     /*
@@ -88,20 +102,23 @@ class TipPercentagesTableViewController: UITableViewController {
     }
     */
     @IBAction func backFromSettings(sender: AnyObject) {
-                dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    override func setEditing(editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        if(!editing) {
+        if (self.editing) {
+           self.editing = false
+        } else {
            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
-
-    @IBAction func startEditing(sender: AnyObject) {
-        self.editing = !self.editing
+    override func setEditing(editing: Bool, animated: Bool) {
+        if (editing) {
+            tips.append(-1.0)
+        } else {
+            tips.removeLast()
+        }
+        self.tableView.reloadData()
+        super.setEditing(editing, animated: animated)
     }
+
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
