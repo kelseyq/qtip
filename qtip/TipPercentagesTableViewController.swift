@@ -68,7 +68,9 @@ class TipPercentagesTableViewController: UITableViewController {
             tips.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         } else if editingStyle == UITableViewCellEditingStyle.Insert {
-            println("insert")
+            var vc = self.storyboard?.instantiateViewControllerWithIdentifier("newTipVC") as NewTipViewController
+            let navigationController = UINavigationController(rootViewController: vc)
+            self.presentViewController(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -89,7 +91,8 @@ class TipPercentagesTableViewController: UITableViewController {
 
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return !(indexPath.row == tips.count - 1)
+        println("checking editability of \(tips[indexPath.row]): \(!(indexPath.row == (tips.count - 1)))")
+        return !(indexPath.row == (tips.count - 1))
     }
 
     /*
@@ -124,6 +127,17 @@ class TipPercentagesTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         defaults.setObject(tips, forKey: "tip_percentages")
         defaults.synchronize()
+    }
+    
+    @IBAction func cancel(segue:UIStoryboardSegue) {
+    }
+    
+    @IBAction func done(segue:UIStoryboardSegue) {
+        var newTipVC = segue.sourceViewController as NewTipViewController
+        newTip = newTipVC.newTipValue
+        tips.insert(newTip, atIndex: tips.count - 1)
+        self.tableView.reloadData()
+        println("inserted")
     }
 
     

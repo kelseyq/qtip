@@ -14,6 +14,7 @@
 		06B9A9911A5CEA570027CD53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B9A98F1A5CEA570027CD53 /* LaunchScreen.xib */; };
 		06B9A99D1A5CEA570027CD53 /* qtipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A99C1A5CEA570027CD53 /* qtipTests.swift */; };
 		06B9A9AA1A5D267A0027CD53 /* TipPercentagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */; };
+		06B9A9BD1A62246E0027CD53 /* NewTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B9A9BC1A62246E0027CD53 /* NewTipViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		06B9A99B1A5CEA570027CD53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06B9A99C1A5CEA570027CD53 /* qtipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qtipTests.swift; sourceTree = "<group>"; };
 		06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipPercentagesTableViewController.swift; sourceTree = "<group>"; };
+		06B9A9BC1A62246E0027CD53 /* NewTipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTipViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		06B9A9A81A5D1DCA0027CD53 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				06B9A9BC1A62246E0027CD53 /* NewTipViewController.swift */,
 				06B9A9A91A5D267A0027CD53 /* TipPercentagesTableViewController.swift */,
 				06B9A9881A5CEA570027CD53 /* ViewController.swift */,
 			);
@@ -225,6 +228,7 @@
 			files = (
 				06B9A9891A5CEA570027CD53 /* ViewController.swift in Sources */,
 				06B9A9871A5CEA570027CD53 /* AppDelegate.swift in Sources */,
+				06B9A9BD1A62246E0027CD53 /* NewTipViewController.swift in Sources */,
 				06B9A9AA1A5D267A0027CD53 /* TipPercentagesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
