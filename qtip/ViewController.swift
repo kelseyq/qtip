@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         for (index, tip) in enumerate(tipPercentages) {
             tipControl.setTitle(String(format: "%.2f%%", tip), forSegmentAtIndex: index)
         }
+        tipControl.selectedSegmentIndex = defaults.integerForKey("default_tip_percentage")
         
     }
 
@@ -36,6 +37,10 @@ class ViewController: UIViewController {
 
 
     @IBAction func onEditingChanged(sender: AnyObject) {
+        calculateBill()
+    }
+    
+    func calculateBill() {
         var billAmount = billField.text._bridgeToObjectiveC().doubleValue
         var tipPercentages = defaults.arrayForKey("tip_percentages") as [Double]
         var tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
@@ -58,6 +63,8 @@ class ViewController: UIViewController {
         for (index, tip) in enumerate(tipPercentages) {
             tipControl.insertSegmentWithTitle(String(format: "%.2f%%", tip), atIndex: index, animated:false)
         }
+        tipControl.selectedSegmentIndex = defaults.integerForKey("default_tip_index")
+        calculateBill()
     }
 
     

@@ -14,16 +14,33 @@ class TipPercentagesTableViewController: UITableViewController {
     
     var tips = [Double]()
     var newTip: Double = 0.0
+    var defaultTipIndex: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         tips = defaults.arrayForKey("tip_percentages") as [Double]
+        self.clearsSelectionOnViewWillAppear = true
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-       self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        defaultTipIndex = defaults.integerForKey("default_tip_index")
+        var indexPath = NSIndexPath(forRow: defaultTipIndex, inSection: 0)
+        selectDefault(indexPath)
+    }
+    
+    func selectDefault(idx: Int) {
+        var indexPath = NSIndexPath(forRow: idx, inSection: 0)
+        selectDefault(indexPath)
+    }
+    
+    func selectDefault(indexPath: NSIndexPath) {
+        var defaultCell = self.tableView.cellForRowAtIndexPath(indexPath)
+        defaultCell?.selectionStyle = UITableViewCellSelectionStyle.None
+        defaultCell?.detailTextLabel?.text = "Default"
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,8 +82,16 @@ class TipPercentagesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            tips.removeAtIndex(indexPath.row)
+            var indexToDelete = indexPath.row
+            if (indexToDelete < defaultTipIndex) {
+                defaultTipIndex--
+            }
+            tips.removeAtIndex(indexToDelete)
+            if (defaultTipIndex >= (tips.count - 1)) { //includes "add new tip"
+                defaultTipIndex = (tips.count - 2)
+            }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            selectDefault(defaultTipIndex)
         } else if editingStyle == UITableViewCellEditingStyle.Insert {
             var vc = self.storyboard?.instantiateViewControllerWithIdentifier("newTipVC") as NewTipViewController
             let navigationController = UINavigationController(rootViewController: vc)
@@ -87,11 +112,19 @@ class TipPercentagesTableViewController: UITableViewController {
         var tipToMove = tips[fromIndexPath.row]
         tips.removeAtIndex(fromIndexPath.row)
         tips.insert(tipToMove, atIndex: toIndexPath.row)
+        if (fromIndexPath.row == defaultTipIndex) {
+            defaultTipIndex = toIndexPath.row
+        } else if ((fromIndexPath.row < defaultTipIndex) &&
+                   (toIndexPath.row >= defaultTipIndex)) {
+            defaultTipIndex--
+        } else if ((fromIndexPath.row > defaultTipIndex) &&
+                    (toIndexPath.row <= defaultTipIndex)) {
+            defaultTipIndex++
+        }
     }
 
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        println("checking editability of \(tips[indexPath.row]): \(!(indexPath.row == (tips.count - 1)))")
         return !(indexPath.row == (tips.count - 1))
     }
 
@@ -126,6 +159,7 @@ class TipPercentagesTableViewController: UITableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         defaults.setObject(tips, forKey: "tip_percentages")
+        defaults.setInteger(defaultTipIndex, forKey: "default_tip_index")
         defaults.synchronize()
     }
     
@@ -137,8 +171,15 @@ class TipPercentagesTableViewController: UITableViewController {
         newTip = newTipVC.newTipValue
         tips.insert(newTip, atIndex: tips.count - 1)
         self.tableView.reloadData()
-        println("inserted")
     }
-
+    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        var oldDefaultPath = NSIndexPath(forRow: defaultTipIndex, inSection: 0)
+        var oldCell = tableView.cellForRowAtIndexPath(oldDefaultPath)
+        oldCell?.detailTextLabel?.text = " "
+        selectDefault(indexPath)
+        defaultTipIndex = indexPath.row
+        return indexPath
+    }
     
 }
